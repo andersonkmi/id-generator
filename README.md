@@ -2,23 +2,24 @@
 
 ## Database config ##
 
-### Requirements for local development ###
+### Requirements ###
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Local container configuration ###
+To configure the local Postgresql container, run the commands below.
 
-To configure the local Postgresql container, run the following commands:
-
+#### Setup the image
 ```bash
 $ cd pgsql/docker
 $ docker image build -t codecraftlabs/idgenerator:1.0.0 .
 ```
 
-Once the image is created, the run the following command:
+#### Start the container
 ```bash
 $ docker container run --detach --name idgenerator --publish 5432:5432 codecraftlabs/idgenerator:1.0.0
 ```
+
 ## Building and running the application
 
 ### Build
