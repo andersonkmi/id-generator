@@ -3,6 +3,7 @@ package org.codecraftlabs.idgenerator.id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -18,6 +19,13 @@ public class IdGenerationRepository {
     public IdGenerationRepository(@Nonnull JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         initializeSequenceMapping();
+    }
+
+
+    @Transactional(rollbackFor = DatabaseException.class)
+    @Nonnull
+    public String getId(@Nonnull String seriesName) {
+        return null;
     }
 
     private void initializeSequenceMapping() {
