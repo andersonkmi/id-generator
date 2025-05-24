@@ -18,7 +18,10 @@ public class IdGeneratorController extends BaseControllerV1 {
 
     @GetMapping(value = "/id/{seriesName}",
             produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<IdResponse> getPaginatedClients(@PathVariable String seriesName, @RequestParam(value = "encoding", required = false) String encoding) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    public ResponseEntity<IdResponse> getPaginatedClients(@PathVariable String seriesName,
+                                                          @RequestParam(value = "encoding", required = false) String encoding) {
+        logger.info("Generating a new id for series '{}'", seriesName);
+        IdResponse response = new IdResponse("12309", seriesName);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
