@@ -20,7 +20,10 @@ public class IdGeneratorController extends BaseControllerV1 {
             produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<IdResponse> getPaginatedClients(@PathVariable String seriesName,
                                                           @RequestParam(value = "encoding", required = false) String encoding) {
-        logger.info("Generating a new id for series '{}'", seriesName);
+        logger.info("Generating a new id for series '{}' using '{}' encoding",
+                seriesName,
+                encoding != null ? encoding : "undefined");
+
         IdResponse response = new IdResponse("12309", seriesName);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
