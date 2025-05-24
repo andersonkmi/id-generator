@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
 
-@Service("DEFAULT")
-public class DefaultIdGeneratorService implements IdGenerationService {
+@Service("default")
+public class DefaultIdGeneratorProcessor implements IdGenerationProcessor {
     @Nonnull
     public String generateId(@Nonnull String seriesName) {
-        return "";
+        return "12345";
     }
 }
