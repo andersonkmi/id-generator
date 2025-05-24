@@ -15,7 +15,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class IdGeneratorController extends BaseControllerV1 {
     private static final Logger logger = LoggerFactory.getLogger(IdGeneratorController.class);
 
-
     @GetMapping(value = "/id/{seriesName}",
             produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<IdResponse> getPaginatedClients(@PathVariable String seriesName,
