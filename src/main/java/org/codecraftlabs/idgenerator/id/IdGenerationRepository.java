@@ -27,7 +27,7 @@ public class IdGenerationRepository {
     public String getId(@Nonnull String seriesName) {
         try {
             String sequenceName = getSequenceName(seriesName);
-            String statement = String.format("select next_val('%s')", sequenceName);
+            String statement = String.format("SELECT NEXTVAL('%s')", sequenceName);
             Long id = jdbcTemplate.queryForObject(statement, Long.class);
             if (id == null) {
                 throw new DatabaseException("Failed to retrieve next value");
@@ -48,7 +48,7 @@ public class IdGenerationRepository {
     private String getSequenceName(@Nonnull String type) {
         String sequenceName = idSequences.getOrDefault(type, "");
         if (sequenceName.isBlank()) {
-            throw new DatabaseException("Invalid sequence name");
+            throw new SequenceNotFoundException("Invalid sequence name");
         }
         return sequenceName;
     }
