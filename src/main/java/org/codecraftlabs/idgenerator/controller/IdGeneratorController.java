@@ -21,6 +21,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 public class IdGeneratorController extends BaseControllerV1 {
@@ -48,7 +49,7 @@ public class IdGeneratorController extends BaseControllerV1 {
             logger.info("Generated id '{}' for series '{}' using '{}' format", id, seriesName, type);
 
             IdResponse response = new IdResponse(id, seriesName);
-            return ResponseEntity.status(OK).body(response);
+            return status(OK).body(response);
         } catch (IdNotGeneratedException exception) {
             logger.error("Id not generated", exception);
             throw new ResponseStatusException(BAD_REQUEST, "Id not generated", exception);

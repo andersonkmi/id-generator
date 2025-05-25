@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.util.Optional.ofNullable;
+
 @Component
 public class SeriesSequenceMapper {
     private final Map<String, String> sequenceMapper = new ConcurrentHashMap<>();
@@ -20,6 +22,6 @@ public class SeriesSequenceMapper {
 
     @Nonnull
     public Optional<String> getSequenceBySeriesName(@Nonnull String seriesName) {
-        return Optional.ofNullable(this.sequenceMapper.get(seriesName));
+        return ofNullable(this.sequenceMapper.get(seriesName));
     }
 }
