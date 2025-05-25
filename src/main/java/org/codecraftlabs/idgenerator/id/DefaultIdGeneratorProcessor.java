@@ -17,7 +17,8 @@ class DefaultIdGeneratorProcessor implements IdGenerationProcessor {
     @Nonnull
     public String generateId(@Nonnull String seriesName) {
         try {
-            return idGenerationRepository.getId(seriesName);
+            long value = idGenerationRepository.getId(seriesName);
+            return String.valueOf(value);
         } catch (SequenceNotFoundException exception) {
             throw new InvalidSeriesException("Invalid series provided", exception);
         } catch (DatabaseException exception) {

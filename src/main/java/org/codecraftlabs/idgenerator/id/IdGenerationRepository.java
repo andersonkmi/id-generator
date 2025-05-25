@@ -1,48 +1,34 @@
 package org.codecraftlabs.idgenerator.id;
 
+import org.codecraftlabs.idgenerator.id.util.JdbcTemplateDataRepository;
 import org.codecraftlabs.idgenerator.id.util.SeriesSequenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-@Repository
+@Component
 public class IdGenerationRepository {
-    // TODO: later the usage of Spring related classes could be wrapped into application classes to isolate specific dependencies
-    private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplateDataRepository jdbcTemplateDataRepository;
     private final SeriesSequenceMapper seriesSequenceMapper;
 
     @Autowired
-    public IdGenerationRepository(@Nonnull JdbcTemplate jdbcTemplate,
+    public IdGenerationRepository(@Nonnull JdbcTemplateDataRepository jdbcTemplateDataRepository,
                                   @Nonnull SeriesSequenceMapper seriesSequenceMapper) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplateDataRepository = jdbcTemplateDataRepository;
         this.seriesSequenceMapper = seriesSequenceMapper;
     }
 
-    @Transactional(rollbackFor = DatabaseException.class)
-    @Nonnull
-    public String getId(@Nonnull String seriesName) {
+    public long getId(@Nonnull String seriesName) {
         try {
             String sequenceName = getSequenceName(seriesName);
-            return getNextSequenceValue(sequenceName);
+            return jdbcTemplateDataRepository.getNextSequenceValue(sequenceName);
         } catch (DataAccessException exception) {
             throw new DatabaseException("Failed to get the next sequence value",
                     exception);
         }
-    }
-
-    @Nonnull
-    private String getNextSequenceValue(@Nonnull String sequenceName) {
-        String statement = String.format("SELECT NEXTVAL('%s')", sequenceName);
-        Long id = jdbcTemplate.queryForObject(statement, Long.class);
-        if (id == null) {
-            throw new DatabaseException("Failed to retrieve next value");
-        }
-        return String.valueOf(id);
     }
 
     @Nonnull
