@@ -1,5 +1,6 @@
 package org.codecraftlabs.idgenerator.id;
 
+import org.codecraftlabs.idgenerator.id.util.SeriesSequenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,19 +8,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class IdGenerationRepository {
-    private final Map<String, String> idSequences = new HashMap<>();
-
     private final JdbcTemplate jdbcTemplate;
+    private final SeriesSequenceMapper seriesSequenceMapper;
 
     @Autowired
-    public IdGenerationRepository(@Nonnull JdbcTemplate jdbcTemplate) {
+    public IdGenerationRepository(@Nonnull JdbcTemplate jdbcTemplate,
+                                  @Nonnull SeriesSequenceMapper seriesSequenceMapper) {
         this.jdbcTemplate = jdbcTemplate;
-        initializeSequenceMapping();
+        this.seriesSequenceMapper = seriesSequenceMapper;
     }
 
     @Transactional(rollbackFor = DatabaseException.class)
@@ -32,24 +32,19 @@ public class IdGenerationRepository {
             if (id == null) {
                 throw new DatabaseException("Failed to retrieve next value");
             }
-
             return String.valueOf(id);
         } catch (DataAccessException exception) {
-            throw new DatabaseException("Client could not be inserted into the database",
+            throw new DatabaseException("Failed to get the next sequence value",
                     exception);
         }
     }
 
-    private void initializeSequenceMapping() {
-        idSequences.put("default", "default_sequence");
-    }
-
     @Nonnull
     private String getSequenceName(@Nonnull String type) {
-        String sequenceName = idSequences.getOrDefault(type, "");
-        if (sequenceName.isBlank()) {
+        Optional<String> sequenceName = seriesSequenceMapper.getSequenceBySeriesName(type);
+        if (sequenceName.isEmpty()) {
             throw new SequenceNotFoundException("Invalid sequence name");
         }
-        return sequenceName;
+        return sequenceName.get();
     }
 }
