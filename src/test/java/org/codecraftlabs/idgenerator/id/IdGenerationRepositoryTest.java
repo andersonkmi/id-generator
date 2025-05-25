@@ -2,9 +2,9 @@ package org.codecraftlabs.idgenerator.id;
 
 import org.codecraftlabs.idgenerator.id.util.JdbcTemplateDataRepository;
 import org.codecraftlabs.idgenerator.id.util.SeriesSequenceMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -22,12 +22,8 @@ public class IdGenerationRepositoryTest {
     @Mock
     private SeriesSequenceMapper seriesSequenceMapper;
 
+    @InjectMocks
     private IdGenerationRepository idGenerationRepository;
-
-    @BeforeEach
-    public void setup() {
-        this.idGenerationRepository = new IdGenerationRepository(jdbcTemplateDataRepository, seriesSequenceMapper);
-    }
 
     @Test
     public void when_series_is_not_present_should_raise_exception() {
