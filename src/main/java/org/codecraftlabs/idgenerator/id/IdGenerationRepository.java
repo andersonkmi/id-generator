@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public class IdGenerationRepository {
+    // TODO: later the usage of Spring related classes could be wrapped into application classes to isolate specific dependencies
     private final JdbcTemplate jdbcTemplate;
     private final SeriesSequenceMapper seriesSequenceMapper;
 
