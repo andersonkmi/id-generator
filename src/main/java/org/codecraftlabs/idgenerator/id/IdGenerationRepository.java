@@ -27,16 +27,21 @@ public class IdGenerationRepository {
     public String getId(@Nonnull String seriesName) {
         try {
             String sequenceName = getSequenceName(seriesName);
-            String statement = String.format("SELECT NEXTVAL('%s')", sequenceName);
-            Long id = jdbcTemplate.queryForObject(statement, Long.class);
-            if (id == null) {
-                throw new DatabaseException("Failed to retrieve next value");
-            }
-            return String.valueOf(id);
+            return getNextSequenceValue(sequenceName);
         } catch (DataAccessException exception) {
             throw new DatabaseException("Failed to get the next sequence value",
                     exception);
         }
+    }
+
+    @Nonnull
+    private String getNextSequenceValue(@Nonnull String sequenceName) {
+        String statement = String.format("SELECT NEXTVAL('%s')", sequenceName);
+        Long id = jdbcTemplate.queryForObject(statement, Long.class);
+        if (id == null) {
+            throw new DatabaseException("Failed to retrieve next value");
+        }
+        return String.valueOf(id);
     }
 
     @Nonnull
