@@ -3,7 +3,6 @@ package org.codecraftlabs.idgenerator.id;
 import org.codecraftlabs.idgenerator.id.util.JdbcTemplateDataRepository;
 import org.codecraftlabs.idgenerator.id.util.SeriesSequenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
@@ -22,13 +21,8 @@ public class IdGenerationRepository {
     }
 
     public long getId(@Nonnull String seriesName) {
-        try {
-            String sequenceName = getSequenceName(seriesName);
-            return jdbcTemplateDataRepository.getNextSequenceValue(sequenceName);
-        } catch (DataAccessException exception) {
-            throw new DatabaseException("Failed to get the next sequence value",
-                    exception);
-        }
+        String sequenceName = getSequenceName(seriesName);
+        return jdbcTemplateDataRepository.getNextSequenceValue(sequenceName);
     }
 
     @Nonnull
