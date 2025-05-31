@@ -1,4 +1,4 @@
-package org.codecraftlabs.idgenerator.id.util;
+package org.codecraftlabs.idgenerator.id.series;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

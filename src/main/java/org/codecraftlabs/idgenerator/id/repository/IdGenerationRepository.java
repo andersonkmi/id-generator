@@ -1,6 +1,6 @@
 package org.codecraftlabs.idgenerator.id.repository;
 
-import org.codecraftlabs.idgenerator.id.util.SeriesSequenceMapper;
+import org.codecraftlabs.idgenerator.id.series.SeriesSequenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
