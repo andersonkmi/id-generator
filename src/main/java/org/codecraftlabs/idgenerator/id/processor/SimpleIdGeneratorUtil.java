@@ -19,9 +19,13 @@ class SimpleIdGeneratorUtil {
 
     @Nonnull
     String generateId(@Nonnull String seriesName) {
+        long value = generateLongId(seriesName);
+        return String.valueOf(value);
+    }
+
+    long generateLongId(@Nonnull String seriesName) {
         try {
-            long value = idGenerationRepository.getId(seriesName);
-            return String.valueOf(value);
+            return idGenerationRepository.getId(seriesName);
         } catch (SequenceNotFoundException exception) {
             throw new InvalidSeriesException("Invalid series provided", exception);
         } catch (DatabaseException exception) {
