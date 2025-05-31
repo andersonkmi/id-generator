@@ -1,8 +1,5 @@
 package org.codecraftlabs.idgenerator.id.processor;
 
-import org.codecraftlabs.idgenerator.id.repository.DatabaseException;
-import org.codecraftlabs.idgenerator.id.repository.IdGenerationRepository;
-import org.codecraftlabs.idgenerator.id.repository.SequenceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +14,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class Base64IdGeneratorProcessorTest {
     @Mock
-    private IdGenerationRepository idGenerationRepository;
+    private SimpleIdGeneratorUtil simpleIdGeneratorUtil;
 
     @InjectMocks
     private Base64IdGeneratorProcessor base64IdGeneratorProcessor;
@@ -25,28 +22,29 @@ public class Base64IdGeneratorProcessorTest {
     @Test
     public void when_sequence_not_found_should_raise_exception() {
         // Setup mock
-        when(idGenerationRepository.getId(anyString()))
-                .thenThrow(SequenceNotFoundException.class);
-
-        assertThatExceptionOfType(InvalidSeriesException.class)
-                .isThrownBy(() -> base64IdGeneratorProcessor.generateId(anyString()));
-    }
-
-    @Test
-    public void when_database_exception_happens_should_raise_exception() {
         // Setup mock
-        when(idGenerationRepository.getId(anyString()))
-                .thenThrow(DatabaseException.class);
+        when(simpleIdGeneratorUtil.generateId(anyString()))
+                .thenThrow(IdNotGeneratedException.class);
 
         assertThatExceptionOfType(IdNotGeneratedException.class)
                 .isThrownBy(() -> base64IdGeneratorProcessor.generateId(anyString()));
     }
 
     @Test
+    public void when_database_exception_happens_should_raise_exception() {
+        // Setup mock
+        when(simpleIdGeneratorUtil.generateId(anyString()))
+                .thenThrow(InvalidSeriesException.class);
+
+        assertThatExceptionOfType(InvalidSeriesException.class)
+                .isThrownBy(() -> base64IdGeneratorProcessor.generateId(anyString()));
+    }
+
+    @Test
     public void when_ok_id_should_return() {
         // Setup mock
-        when(idGenerationRepository.getId(anyString())).thenReturn(100L);
+        when(simpleIdGeneratorUtil.generateId(anyString())).thenReturn("100");
         var result = base64IdGeneratorProcessor.generateId("default");
-        assertThat(result).isEqualTo("MDAwMDAwMDEwMA==");
+        assertThat(result).isEqualTo("MTAw");
     }
 }
