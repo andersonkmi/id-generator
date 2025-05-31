@@ -13,6 +13,7 @@ When requesting a new id, the following formats are currently supported:
 - base64: returns a base-64 encoded version of the newly created id
 - sha256: applies SHA-256 hashing on the id just generated
 - luhn: returns a luhn valid number
+- nonluhn: returns a non-luhn valid number
 
 ## Database config ##
 
