@@ -27,7 +27,8 @@ class SHA256IdGeneratorProcessor implements IdGenerationProcessor {
         return hashString(originalValue);
     }
 
-    private String hashString(String input) {
+    @Nonnull
+    private String hashString(@Nonnull String input) {
         try {
             // Create MessageDigest instance for SHA-256
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
