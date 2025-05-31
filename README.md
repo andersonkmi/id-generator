@@ -6,6 +6,13 @@ to generate the numbers.
 Distinct database sequences can be used for specific purposes so we can generate unique ids for different purposes without
 interfering with each other.
 
+## Id generation formats
+
+When requesting a new id, the following formats are currently supported:
+- default: returns the number as is without any formatting
+- base64: returns a base-64 encoded version of the newly created id
+- sha256: applies SHA-256 hashing on the id just generated
+
 ## Database config ##
 
 ### Requirements ###
