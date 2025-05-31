@@ -30,7 +30,7 @@ class NonLuhnCheckedIdGeneratorProcessor implements IdGenerationProcessor {
             originalValue = simpleIdGeneratorUtil.generateId(seriesName);
             numberOfCalls++;
         }
-        logger.info("Number of calls until finding a valid luhn checked number: '{}'", numberOfCalls);
+        logger.info("Number of calls until finding a non valid luhn checked number: '{}'", numberOfCalls);
         return originalValue;
     }
 }
