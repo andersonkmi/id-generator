@@ -1,6 +1,6 @@
 package org.codecraftlabs.idgenerator.id.processor;
 
-import org.codecraftlabs.idgenerator.id.DatabaseException;
+import org.codecraftlabs.idgenerator.id.util.DatabaseException;
 import org.codecraftlabs.idgenerator.id.IdGenerationRepository;
 import org.codecraftlabs.idgenerator.id.IdNotGeneratedException;
 import org.codecraftlabs.idgenerator.id.InvalidSeriesException;
