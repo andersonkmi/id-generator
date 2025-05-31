@@ -14,6 +14,7 @@ When requesting a new id, the following formats are currently supported:
 - sha256: applies SHA-256 hashing on the id just generated
 - luhn: returns a luhn valid number
 - nonluhn: returns a non-luhn valid number
+- timestamped: returns the generated id with timestamp in milliseconds
 
 ## Database config ##
 
