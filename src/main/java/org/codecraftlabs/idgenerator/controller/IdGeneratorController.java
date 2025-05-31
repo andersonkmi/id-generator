@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
@@ -39,17 +40,12 @@ public class IdGeneratorController extends BaseControllerV1 {
     public ResponseEntity<IdResponse> getPaginatedClients(@PathVariable String seriesName,
                                                           @RequestParam(value = "format", required = false) String format) {
         try {
-            String type = format != null ? format : "default";
-            Optional<IdGenerationProcessor> processor = idGenerationServiceFactory.getProcessor(type);
-            if (processor.isEmpty()) {
-                throw new ResponseStatusException(BAD_REQUEST, "Invalid format requested");
-            }
-
-            String id = processor.get().generateId(seriesName);
+            String type = getIdGeneratorProcessorType(format);
+            IdGenerationProcessor processor = getProcessor(type);
+            String id = processor.generateId(seriesName);
             logger.info("Generated id '{}' for series '{}' using '{}' format", id, seriesName, type);
 
-            IdResponse response = new IdResponse(id, seriesName);
-            return status(OK).body(response);
+            return generateResponse(id, seriesName);
         } catch (IdNotGeneratedException exception) {
             logger.error("Id not generated", exception);
             throw new ResponseStatusException(BAD_REQUEST, "Id not generated", exception);
@@ -57,5 +53,25 @@ public class IdGeneratorController extends BaseControllerV1 {
             logger.error("Series is invalid", exception);
             throw new ResponseStatusException(NOT_FOUND, "Series is invalid", exception);
         }
+    }
+
+    @Nonnull
+    private String getIdGeneratorProcessorType(@CheckForNull String format) {
+        return format != null ? format : "default";
+    }
+
+    @Nonnull
+    private IdGenerationProcessor getProcessor(@Nonnull String type) {
+        Optional<IdGenerationProcessor> processor = idGenerationServiceFactory.getProcessor(type);
+        if (processor.isEmpty()) {
+            throw new ResponseStatusException(BAD_REQUEST, "Invalid format requested");
+        }
+        return processor.get();
+    }
+
+    @Nonnull
+    private ResponseEntity<IdResponse> generateResponse(@Nonnull String id, @Nonnull String seriesName) {
+        IdResponse response = new IdResponse(id, seriesName);
+        return status(OK).body(response);
     }
 }
