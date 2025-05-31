@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Nonnull;
 
 @Repository
-public class JdbcTemplateDataRepository {
+class JdbcTemplateDataRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcTemplateDataRepository(@Nonnull JdbcTemplate jdbcTemplate) {
+    JdbcTemplateDataRepository(@Nonnull JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public long getNextSequenceValue(@Nonnull String sequenceName) {
+    long getNextSequenceValue(@Nonnull String sequenceName) {
         try {
             String statement = String.format("SELECT NEXTVAL('%s')", sequenceName);
             Long id = jdbcTemplate.queryForObject(statement, Long.class);

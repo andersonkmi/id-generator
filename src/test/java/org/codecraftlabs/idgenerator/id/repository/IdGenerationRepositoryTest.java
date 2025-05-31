@@ -1,9 +1,5 @@
-package org.codecraftlabs.idgenerator.id;
+package org.codecraftlabs.idgenerator.id.repository;
 
-import org.codecraftlabs.idgenerator.id.repository.IdGenerationRepository;
-import org.codecraftlabs.idgenerator.id.repository.DatabaseException;
-import org.codecraftlabs.idgenerator.id.repository.JdbcTemplateDataRepository;
-import org.codecraftlabs.idgenerator.id.repository.SequenceNotFoundException;
 import org.codecraftlabs.idgenerator.id.series.SeriesSequenceMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
