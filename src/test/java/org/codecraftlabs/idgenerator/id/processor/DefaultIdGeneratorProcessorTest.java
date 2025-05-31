@@ -1,5 +1,10 @@
-package org.codecraftlabs.idgenerator.id;
+package org.codecraftlabs.idgenerator.id.processor;
 
+import org.codecraftlabs.idgenerator.id.DatabaseException;
+import org.codecraftlabs.idgenerator.id.IdGenerationRepository;
+import org.codecraftlabs.idgenerator.id.IdNotGeneratedException;
+import org.codecraftlabs.idgenerator.id.InvalidSeriesException;
+import org.codecraftlabs.idgenerator.id.SequenceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
