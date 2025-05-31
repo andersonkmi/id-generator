@@ -3,7 +3,8 @@ package org.codecraftlabs.idgenerator.id.util;
 import javax.annotation.Nonnull;
 
 enum SeriesToSequence {
-    DEFAULT("default", "default_sequence");
+    DEFAULT("default", "default_sequence"),
+    PRODUCT("product", "product_sequence");
 
     private final String seriesName;
     private final String sequenceName;

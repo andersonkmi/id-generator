@@ -32,4 +32,10 @@ public class SeriesSequenceMapperTest {
         var result = this.seriesSequenceMapper.getSequenceBySeriesName("default");
         assertThat(result).isPresent();
     }
+
+    @Test
+    public void when_product_series_selected_should_return_linked_sequence() {
+        var result = this.seriesSequenceMapper.getSequenceBySeriesName("product");
+        assertThat(result).isPresent();
+    }
 }
