@@ -1,4 +1,4 @@
-package org.codecraftlabs.idgenerator.id.util;
+package org.codecraftlabs.idgenerator.id.repository;
 
 public class DatabaseException extends RuntimeException {
     public DatabaseException(String message) {

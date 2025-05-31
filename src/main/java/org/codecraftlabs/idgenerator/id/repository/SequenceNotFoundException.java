@@ -1,6 +1,4 @@
-package org.codecraftlabs.idgenerator.id;
-
-import org.codecraftlabs.idgenerator.id.util.DatabaseException;
+package org.codecraftlabs.idgenerator.id.repository;
 
 public class SequenceNotFoundException extends DatabaseException {
     public SequenceNotFoundException(String message) {

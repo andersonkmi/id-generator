@@ -1,4 +1,4 @@
-package org.codecraftlabs.idgenerator.id.util;
+package org.codecraftlabs.idgenerator.id.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

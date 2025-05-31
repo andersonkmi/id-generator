@@ -2,8 +2,8 @@ package org.codecraftlabs.idgenerator.controller;
 
 import org.codecraftlabs.idgenerator.id.IdGenerationProcessor;
 import org.codecraftlabs.idgenerator.id.IdGenerationServiceFactory;
-import org.codecraftlabs.idgenerator.id.IdNotGeneratedException;
-import org.codecraftlabs.idgenerator.id.InvalidSeriesException;
+import org.codecraftlabs.idgenerator.id.repository.IdNotGeneratedException;
+import org.codecraftlabs.idgenerator.id.processor.InvalidSeriesException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
