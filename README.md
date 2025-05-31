@@ -1,5 +1,11 @@
 # Id generator service #
 
+This is a small service that can generate unique ids in a concurrent fashion. The idea is quite simple: use database sequences
+to generate the numbers.
+
+Distinct database sequences can be used for specific purposes so we can generate unique ids for different purposes without
+interfering with each other.
+
 ## Database config ##
 
 ### Requirements ###
@@ -11,30 +17,30 @@ To configure the local Postgresql container, run the commands below.
 
 #### Setup the image
 ```bash
-$ cd pgsql/docker
-$ docker image build -t codecraftlabs/idgenerator:1.0.0 .
+cd pgsql/docker
+docker image build -t codecraftlabs/idgenerator:1.0.0 .
 ```
 
 #### Start the container
 ```bash
-$ docker container run --detach --name idgenerator --publish 5432:5432 codecraftlabs/idgenerator:1.0.0
+docker container run --detach --name idgenerator --publish 5432:5432 codecraftlabs/idgenerator:1.0.0
 ```
 
 ## Building and running the application
 
 ### Build
 ```bash
-$ gradle clean build
+gradle clean build
 ```
 
 ### Run
 
 ```shell
-$ java -jar ./build/libs/id-generator-1.0.0.jar
+java -jar ./build/libs/id-generator-1.0.0.jar
 ```
 
 ### Run with remote debugging enabled 
 
 ```shell
-$ java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar ./build/libs/id-generator-1.0.0.jar
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar ./build/libs/id-generator-1.0.0.jar
 ```
