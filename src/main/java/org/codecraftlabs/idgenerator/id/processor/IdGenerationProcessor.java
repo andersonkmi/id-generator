@@ -1,4 +1,4 @@
-package org.codecraftlabs.idgenerator.id;
+package org.codecraftlabs.idgenerator.id.processor;
 
 import javax.annotation.Nonnull;
 
