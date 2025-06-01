@@ -11,7 +11,7 @@ class Base64IdGeneratorProcessor implements IdGenerationProcessor {
     private final SimpleIdGeneratorUtil simpleIdGeneratorUtil;
 
     @Autowired
-    public Base64IdGeneratorProcessor(@Nonnull SimpleIdGeneratorUtil simpleIdGeneratorUtil) {
+    Base64IdGeneratorProcessor(@Nonnull SimpleIdGeneratorUtil simpleIdGeneratorUtil) {
         this.simpleIdGeneratorUtil = simpleIdGeneratorUtil;
     }
 

@@ -10,7 +10,7 @@ class DefaultIdGeneratorProcessor implements IdGenerationProcessor {
     private final SimpleIdGeneratorUtil simpleIdGeneratorUtil;
 
     @Autowired
-    public DefaultIdGeneratorProcessor(@Nonnull SimpleIdGeneratorUtil simpleIdGeneratorUtil) {
+    DefaultIdGeneratorProcessor(@Nonnull SimpleIdGeneratorUtil simpleIdGeneratorUtil) {
         this.simpleIdGeneratorUtil = simpleIdGeneratorUtil;
     }
 
