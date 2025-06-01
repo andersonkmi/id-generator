@@ -1,6 +1,7 @@
 package org.codecraftlabs.idgenerator.id.processor;
 
 import org.codecraftlabs.idgenerator.id.IdGenerationProcessor;
+import org.codecraftlabs.idgenerator.id.util.LuhnValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ class LuhnCheckedIdGeneratorProcessor implements IdGenerationProcessor {
     public String generateId(@Nonnull String seriesName) {
         String originalValue = simpleIdGeneratorUtil.generateId(seriesName);
         int numberOfCalls = 1;
-        while(!luhnValidator.isValidLuhn(originalValue)) {
+        while(luhnValidator.isInvalid(originalValue)) {
             originalValue = simpleIdGeneratorUtil.generateId(seriesName);
             numberOfCalls++;
         }
