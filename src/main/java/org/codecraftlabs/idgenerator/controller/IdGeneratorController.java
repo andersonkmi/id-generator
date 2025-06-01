@@ -71,7 +71,6 @@ public class IdGeneratorController extends BaseControllerV1 {
 
     @Nonnull
     private ResponseEntity<IdResponse> generateResponse(@Nonnull String id, @Nonnull String seriesName) {
-        IdResponse response = new IdResponse(id, seriesName);
-        return status(OK).body(response);
+        return status(OK).body(new IdResponse(id, seriesName));
     }
 }
