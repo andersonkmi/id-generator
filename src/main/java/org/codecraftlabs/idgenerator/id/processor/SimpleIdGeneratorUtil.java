@@ -27,7 +27,7 @@ class SimpleIdGeneratorUtil {
         try {
             return idGenerationRepository.getId(seriesName);
         } catch (SequenceNotFoundException exception) {
-            throw new InvalidSeriesException("Invalid series provided", exception);
+            throw new InvalidSeriesException("Invalid series name provided", exception);
         } catch (DatabaseException exception) {
             throw new IdNotGeneratedException("Failed to generate next id", exception);
         }
