@@ -29,7 +29,7 @@ class SimpleIdGeneratorUtil {
         } catch (SequenceNotFoundException exception) {
             throw new InvalidSeriesException("Invalid series name provided", exception);
         } catch (DatabaseException exception) {
-            throw new IdNotGeneratedException("Failed to generate id", exception);
+            throw new IdNotGeneratedException("Failed to generate id due to a database issue", exception);
         }
     }
 }
