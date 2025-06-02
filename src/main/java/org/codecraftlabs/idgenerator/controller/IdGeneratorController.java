@@ -35,7 +35,7 @@ public class IdGeneratorController extends BaseControllerV1 {
         this.idGenerationServiceFactory = idGenerationServiceFactory;
     }
 
-    @GetMapping(value = "/id/{seriesName}",
+    @GetMapping(value = "/ids/{seriesName}",
             produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<IdResponse> getPaginatedClients(@PathVariable String seriesName,
                                                           @RequestParam(value = "format", required = false) String format) {
