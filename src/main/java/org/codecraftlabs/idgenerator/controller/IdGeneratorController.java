@@ -44,7 +44,6 @@ public class IdGeneratorController extends BaseControllerV1 {
             IdGenerationProcessor processor = getProcessor(type);
             String id = processor.generateId(seriesName);
             logger.info("Generated id '{}' for series '{}' using '{}' format", id, seriesName, type);
-
             return generateResponse(id, seriesName);
         } catch (IdNotGeneratedException exception) {
             logger.error("Id not generated", exception);
