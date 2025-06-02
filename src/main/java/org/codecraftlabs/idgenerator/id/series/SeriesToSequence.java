@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public enum SeriesToSequence {
-    DEFAULT("DEF", "default", "default_sequence"),
+    DEFAULT("STD", "default", "default_sequence"),
     PRODUCT("PROD", "product", "product_sequence");
 
     private final String prefix;
