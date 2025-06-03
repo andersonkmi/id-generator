@@ -6,7 +6,7 @@ to generate the numbers.
 Distinct database sequences can be used for specific purposes so we can generate unique ids for different purposes without
 interfering with each other.
 
-## Id generation formats
+## 1. Id generation formats
 
 When requesting a new id, the following formats are currently supported:
 - default: returns the number as is without any formatting
@@ -17,61 +17,61 @@ When requesting a new id, the following formats are currently supported:
 - timestamped: returns the generated id with timestamp in milliseconds
 - prefixed: returns a new generated id by placing a prefix based from the series name
 
-## Database config ##
+## 2. Database config ##
 
-### Requirements ###
+### 2.1. Requirements ###
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-### Local container configuration ###
+### 2.2. Local container configuration ###
 To configure the local Postgresql container, run the commands below.
 
-#### Setup the image
+#### 2.2.1. Setup the image
 ```bash
 cd pgsql/docker
 docker image build -t codecraftlabs/idgenerator:1.0.0 .
 ```
 
-#### Start the container
+#### 2.2.2. Start the container
 ```bash
 docker container run --detach --name idgenerator --publish 5432:5432 codecraftlabs/idgenerator:1.0.0
 ```
 
-## Building and running the application
+## 3. Building and running the application
 
-### Build
+### 3.1. Build
 ```bash
 gradle clean build
 ```
 
-### Run
+### 3.2. Run
 
 ```shell
 java -jar ./build/libs/id-generator-1.0.0.jar
 ```
 
-### Run with remote debugging enabled 
+### 3.3. Run with remote debugging enabled 
 
 ```shell
 java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar ./build/libs/id-generator-1.0.0.jar
 ```
 
-## Running the application and the database using Docker compose
+## 4. Running the application and the database using Docker compose
 
-### Create the application image
+### 4.1. Create the application image
 
 First create the application image using the command below:
 ```shell
 docker image build -t codecraftlabs/idgeneratorapp:1.0.0 -f ./docker/app/Dockerfile .
 ```
 
-### Start the containers
+### 4.2. Start the containers
 ```
 cd docker
 docker-compose up -d
 ```
 
-### Shutdown the containers
+### 4.3. Shutdown the containers
 ```
 docker-compose down -v
 ```
