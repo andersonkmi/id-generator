@@ -55,3 +55,23 @@ java -jar ./build/libs/id-generator-1.0.0.jar
 ```shell
 java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar ./build/libs/id-generator-1.0.0.jar
 ```
+
+## Running the application and the database using Docker compose
+
+### Create the application image
+
+First create the application image using the command below:
+```shell
+docker image build -t codecraftlabs/idgeneratorapp:1.0.0 -f ./docker/app/Dockerfile .
+```
+
+### Start the containers
+```
+cd docker
+docker-compose up -d
+```
+
+### Shutdown the containers
+```
+docker-compose down -v
+```

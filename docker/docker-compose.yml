@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  postgres:
+    image: codecraftlabs/idgenerator:1.0.0
+    container_name: id-generator-db
+    environment:
+      POSTGRES_DB: idgenerator
+      POSTGRES_USER: idgen
+      POSTGRES_PASSWORD: idgen
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  id-generator:
+    image: codecraftlabs/idgeneratorapp:1.0.0
+    container_name: id-generator-app
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: idgenerator
+      DB_USER: idgen
+      DB_PASSWORD: idgen
+    ports:
+      - "27110:27110"
+
+volumes:
+  postgres_data:
