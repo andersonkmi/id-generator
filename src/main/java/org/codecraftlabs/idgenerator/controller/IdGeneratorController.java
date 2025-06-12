@@ -50,7 +50,7 @@ public class IdGeneratorController extends BaseControllerV1 {
             throw new ResponseStatusException(BAD_REQUEST, "Id not generated", exception);
         } catch (InvalidSeriesException exception) {
             logger.error("Series name is invalid", exception);
-            throw new ResponseStatusException(NOT_FOUND, "Series is invalid", exception);
+            throw new ResponseStatusException(NOT_FOUND, "Series name is invalid", exception);
         }
     }
 
